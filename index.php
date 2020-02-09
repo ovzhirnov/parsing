@@ -1,22 +1,22 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+п»ї<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1251" />
-<title>Parsing from parishop.ru</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Р”РѕРєСѓРјРµРЅС‚ Р±РµР· РЅР°Р·РІР°РЅРёСЏ</title>
 </head>
 
 <body>
 <?php
-// Автор - Жирнов Олег Вячеславович
-// Парсер цен для url: https://parishop.ru/catalog/zhenskoye-nizhneye-belye/
-// Запись производится в таблицу БД MySQL, параллельно выводится лог на экран
+// РђРІС‚РѕСЂ - Р–РёСЂРЅРѕРІ РћР»РµРі Р’СЏС‡РµСЃР»Р°РІРѕРІРёС‡
+// РџР°СЂСЃРµСЂ С†РµРЅ РґР»СЏ url: https://parishop.ru/catalog/zhenskoye-nizhneye-belye/
+// Р—Р°РїРёСЃСЊ РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ РІ С‚Р°Р±Р»РёС†Сѓ Р‘Р” MySQL, РїР°СЂР°Р»Р»РµР»СЊРЅРѕ РІС‹РІРѕРґРёС‚СЃСЏ Р»РѕРі РЅР° СЌРєСЂР°РЅ
 
 if (!$_POST['graburl'])
 { ?>
 <form action="index.php" method="post" name="graburl">
-<br>Введите адрес страницы для парсинга:<br>
+<br>Р’РІРµРґРёС‚Рµ Р°РґСЂРµСЃ СЃС‚СЂР°РЅРёС†С‹ РґР»СЏ РїР°СЂСЃРёРЅРіР°:<br>
 <input type="text" size="60" name="graburl">
-<input type="submit" value="поехали" name="go">
+<input type="submit" value="РїРѕРµС…Р°Р»Рё" name="go">
 </form>
 <?php }
 else
@@ -26,7 +26,7 @@ $db_password = "pass";
 $db_name = "database";
 $table_name = "table1";
 $conn = new mysqli("localhost", $db_username, $db_password, $db_name);
-if ($conn->connect_error) {die("Ошибка подключения: " . $conn->connect_error);}
+if ($conn->connect_error) {die("РћС€РёР±РєР° РїРѕРґРєР»СЋС‡РµРЅРёСЏ: " . $conn->connect_error);}
 
 $graburl = $_POST['graburl'];
 ini_set('max_execution_time', 600);
@@ -59,13 +59,13 @@ $price = str_replace($mask1,'',$price);
 $sql = "INSERT INTO ".$table_name." (price) VALUES (".$price.")";
 if ($conn->query($sql) === TRUE) 
 	{
-	echo date(DATE_RFC822).": В таблице ".$table_name." создана новая запись price - ".$price.".</br>";
+	echo date(DATE_RFC822).": Р’ С‚Р°Р±Р»РёС†Рµ ".$table_name." СЃРѕР·РґР°РЅР° РЅРѕРІР°СЏ Р·Р°РїРёСЃСЊ price - ".$price.".</br>";
 	$number++;
 	} 
-else {echo "Ошибка: " . $sql  . $conn->error . "</br>";}
+else {echo "РћС€РёР±РєР°: " . $sql  . $conn->error . "</br>";}
 $s1 = strpos($rf,$mask1,$s2);
 }
-echo "Успешно создано записей - ".$number." в таблице ".$table_name;
+echo "РЈСЃРїРµС€РЅРѕ СЃРѕР·РґР°РЅРѕ Р·Р°РїРёСЃРµР№ - ".$number." РІ С‚Р°Р±Р»РёС†Рµ ".$table_name;
 $conn->close();
 }
 ?>
