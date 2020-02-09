@@ -1,0 +1,5 @@
+RemoveHandler .html .htm
+AddType application/x-httpd-php .php .htm .html .phtml
+#ErrorDocument 404 /missing.php
+php_value error_reporting E_NONE
+
